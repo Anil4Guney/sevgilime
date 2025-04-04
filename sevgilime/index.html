@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sevgilim İçin</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+  <!-- Kalp İkonu, şarkıyı başlatacak -->
+  <div id="heart" onclick="playSong()" style="font-size: 100px; text-align: center; cursor: pointer;">
+    💖
+  </div>
+
+  <!-- Fotoğrafların gösterileceği alan -->
+  <div id="photo" style="display: none; text-align: center; margin-top: 20px;">
+    <img id="photos" src="{{ url_for('static', filename='photos/WhatsApp Image 2025-04-04 at 18.19.17 (7).jpeg') }}" alt="Fotoğraf 1" onclick="nextPhoto()" style="width: 300px; cursor: pointer;">
+  </div>
+
+  <!-- Mesaj kısmı -->
+  <div id="message" style="display: none; margin-top: 20px; text-align: center;">
+    <p>Belki bazı konularda farklı düşünüyoruz… Belki senin doğup büyüdüğün dünya, benimkinden biraz farklıydı. Ailelerimizin bize kattıkları, inançlarımızı ve bakış açılarımızı şekillendirdi. Evet, dini olarak benzer şeylere inanıyoruz ama bazı şeyleri farklı yorumluyoruz. Siyasi olarak da aynı fikirde değiliz belki… Ama ben seni fikrin için değil, kalbin için sevdim.</p>
+
+    <p>Ben seninle aynı şeyi düşünmek zorunda değilim, ama aynı kalpte buluşmak istiyorum. Farklılıklarımızın bizi ayırmasına değil, birbirimizi daha çok anlamamıza vesile olmasını istiyorum. Çünkü seni tanıdıkça anladım ki; mesele aynı fikre sahip olmak değil, aynı duyguda buluşabilmekmiş.</p>
+
+    <p>Seni hâlâ çok seviyorum… Ve ne kadar zaman geçerse geçsin, seni özlemekten vazgeçemiyorum. Gülüşünü, bakışını, sesini… her şeyini. Hayatımda bir boşluk var ve o boşluk sadece seninle dolabiliyor.</p>
+
+    <p>Ben yeniden başlamak istiyorum. Bu kez sadece sevgimizle değil, anlayışımızla da güçlü olalım istiyorum. El ele verelim, fikirlerimizi tartışmadan değil, dinleyerek paylaşalım. Biz bu sevgiyi fikir ayrılıklarına kurban etmeyelim.</p>
+
+    <p>Çünkü eğer sevgimiz varsa, her şeyin üstesinden gelebiliriz. Ve ben inanıyorum… Biz hâlâ yarım kalmış bir hikâyeyiz, mutlu sona ulaşmayı hak eden.</p>
+
+    <p>Barışalım mı?</p>
+    <button id="yes" onclick="showLoveMessage()">Evet</button>
+    <button id="no" disabled>Hayır</button>
+  </div>
+
+  <!-- Şarkı -->
+  <audio id="song" preload="auto">
+    <source src="{{ url_for('static', filename='audio/ask.mp3') }}" type="audio/mp3">
+    Tarayıcınız bu dosyayı desteklemiyor.
+  </audio>
+
+  <script>
+    let currentPhotoIndex = 0;
+    const photos = [
+      "{{ url_for('static', filename='photos/WhatsApp Image 2025-04-04 at 18.19.17 (7).jpeg') }}",
+      "{{ url_for('static', filename='photos/WhatsApp Image 2025-04-04 at 18.19.17 (6).jpeg') }}",
+      "{{ url_for('static', filename='photos/WhatsApp Image 2025-04-04 at 18.19.17 (5).jpeg') }}",
+      "{{ url_for('static', filename='photos/WhatsApp Image 2025-04-04 at 18.19.17 (4).jpeg') }}",
+      "{{ url_for('static', filename='photos/WhatsApp Image 2025-04-04 at 18.19.17 (3).jpeg') }}",
+      "{{ url_for('static', filename='photos/WhatsApp Image 2025-04-04 at 18.19.17 (2).jpeg') }}",
+      "{{ url_for('static', filename='photos/WhatsApp Image 2025-04-04 at 18.19.17 (1).jpeg') }}",
+      "{{ url_for('static', filename='photos/WhatsApp Image 2025-04-04 at 18.19.17.jpeg') }}",
+      "{{ url_for('static', filename='photos/WhatsApp Image 2025-04-04 at 18.19.16.jpeg') }}"
+    ];
+
+    function playSong() {
+      const song = document.getElementById("song");
+      song.play();
+      document.getElementById("photo").style.display = "block"; // Fotoğrafları göster
+      document.getElementById("message").style.display = "block"; // Mesajı göster
+    }
+
+    function nextPhoto() {
+      currentPhotoIndex = (currentPhotoIndex + 1) % photos.length;
+      document.getElementById("photos").src = photos[currentPhotoIndex];
+    }
+
+    function showLoveMessage() {
+      document.getElementById("message").innerHTML = "<p>Seni seviyorum!</p>"; // Barışma sonrası mesaj
+    }
+  </script>
+
+</body>
+</html>
